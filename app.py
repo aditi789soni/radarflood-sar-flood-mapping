@@ -252,9 +252,6 @@ def execute_sar_pipeline(
 def main() -> None:
     inject_dashboard_css()
 
-    if "demo_active" not in st.session_state:
-        st.session_state["demo_active"] = True
-
     # ==================== SIDEBAR CONTROLS ====================
     with st.sidebar:
         st.markdown("### 🛰️ Data Acquisition & Mode")
@@ -264,11 +261,11 @@ def main() -> None:
                 "Synthetic SAR Demonstration Mode",
                 "Upload Local Pre/Post GeoTIFFs",
             ],
-            index=0 if st.session_state["demo_active"] else 1,
+            index=0,
+            key="input_source_mode",
         )
 
         is_demo_mode = data_mode == "Synthetic SAR Demonstration Mode"
-        st.session_state["demo_active"] = is_demo_mode
 
         uploaded_pre = None
         uploaded_post = None
